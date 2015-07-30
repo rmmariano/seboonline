@@ -9,9 +9,11 @@ response.logo = A(B('web',SPAN(2),'py'),XML('&trade;&nbsp;'),
                   _class="brand",_href="http://www.web2py.com/")
 '''
 
-response.logo = A(B('Sebo Online'),XML('&trade;&nbsp;'),_class="brand",_href=URL('default', 'index'))
-response.title = request.application.replace('_',' ').title()
-response.subtitle = ''
+response.title = 'Sebo Online'
+response.subtitle = 'O seu site de trocas.'
+response.logo = A(B(response.title),XML('&trade;&nbsp;'),_class="brand",_href=URL('default', 'index'))
+#response.title = request.application.replace('_',' ').title()
+
 
 ## read more at http://dev.w3.org/html5/markup/meta.name.html
 response.meta.author = 'Your Name <you@example.com>'
