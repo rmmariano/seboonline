@@ -27,9 +27,11 @@ response.google_analytics_id = None
 ## this is the main application menu add/remove items as required
 #########################################################################
 
-response.menu = [
-    (T('Home'), False, URL('default', 'index'), [])
-]
+response.menu = [(T('Home'), False, URL('default', 'index'), [])]
+
+# create my account menu, to allow the user to access it.
+myaccount = [(T('My Account'),False,URL('default','indexsms'))]
+support = [(T('Support'), False, URL('default', 'support'))]
 
 DEVELOPMENT_MENU = True
 
