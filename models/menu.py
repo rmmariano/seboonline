@@ -29,9 +29,8 @@ response.google_analytics_id = None
 
 response.menu = [(T('Home'), False, URL('default', 'index'), [])]
 
-# create my account menu, to allow the user to access it.
-myaccount = [(T('My Account'),False,URL('default','indexsms'))]
-support = [(T('Support'), False, URL('default', 'support'))]
+# only users can access it.
+myaccount = [(T('My Account'), False, URL('account', 'myaccount'))]
 
 DEVELOPMENT_MENU = True
 
