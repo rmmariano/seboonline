@@ -30,7 +30,7 @@ response.google_analytics_id = None
 response.menu = [(T('Home'), False, URL('default', 'index'), [])]
 
 # only users can access it.
-myaccount = [(T('My Account'), False, URL('account', 'myaccount'))]
+myaccount = [(T('My Account'), False, URL('account', 'myitems'))]
 
 DEVELOPMENT_MENU = True
 

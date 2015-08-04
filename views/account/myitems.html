@@ -1,0 +1,48 @@
+{{extend 'layout.html'}}
+
+{{ block leftmenu }}
+{{ include 'account/account_menu.html' }}
+{{ end }}
+
+{{ block nameofmenu }}
+{{ = T('My Items') }}
+{{ end }}
+
+{{ block descriptionofmenu }}
+
+<div>
+	<button  class="btn btn-inverse"> >>> {{ =T('New Item') }}</button>
+	<div id="div-additem">
+
+		<div class="">
+			<h1> Cadastrar Item </h1>
+			<div>
+				<label> Título </label>
+				<input id="in-title" type="text"/>
+			</div>
+			<div>
+				<label> Categorias </label>
+				<select id="se-categoria">
+					<option value="4863277368606720">Brinquedos e Games</option>
+					<option value="5707702298738688">CDs, DVDs e BLU-RAYs</option>
+					<option value="6270652252160000">Informática</option>
+					<option value="5812155903377408">Livros, Mangás e HQs</option>
+					<option value="5989177275449344">Móveis</option>
+					<option value="5426227322028032">Outros</option>
+					<option value="5144752345317376">Vestuário</option>
+				</select>
+			</div>
+			<div>
+				<label> Descrição </label>
+				<input id="in-description" type="text"/>
+			</div>
+			<button  class="btn btn-inverse"> Salvar </button>
+		</div>
+
+	</div>
+</div>
+
+<div class="gray-line"></div>
+kkkk
+
+{{ end }}
