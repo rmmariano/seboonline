@@ -86,6 +86,7 @@ $ git checkout master
 #depois use o merge na branch que você quer
 $ git merge refs#1
 #isso fará com que a master aponte para onde refs#1 aponta (atualizando a master com as atualizações de refs#1)
+$ git push origin master (mandar as atualizações do merge para o github)
 
 #como você já fez o merge da branch para a master, você não precisa mais da branch antiga (já que a master aponta para o mesmo local que a branch), para excluir a branch antiga usa-se:
 $ git branch -d refs#1
