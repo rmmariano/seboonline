@@ -58,6 +58,11 @@
     (left_sidebar_enabled and 1 or 0)+(right_sidebar_enabled and 1 or 0)]
   }}
 
+  {{ 
+  useownbody = globals().get('useownbody',False) 
+  useownmenu = globals().get('useownmenu',False) 
+  }}
+
   <!-- uncomment here to load jquery-ui
        <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/themes/ui-lightness/jquery-ui.css" type="text/css" media="all" />
        <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js" type="text/javascript"></script>
@@ -100,48 +105,51 @@
   <div class="container">
     <section id="main" class="main row">
 
-        <div style="margin-left: 30px;">
-
-            <!-- body empty -->
-            {{ block body }} {{ end }}
-
-            <!-- body with left menu end its body -->
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="span3">
-                        <center>
-                            {{ block leftmenu }}{{ end }}
-                        </center>
-                    </div>
-                    <div class="span8">
-                        <center>
-                            <div class="accordion" style="width: 100%;">
-                              <div class="accordion-group">
-                                <div class="accordion-heading">
-                                  <center>
-                                    <div class="accordion-toggle div-blue">
-                                          {{ block nameofmenu }}{{ end }}
-                                    </div>  
-                                  </center>
+        {{if useownbody:}}
+            <div style="margin-left: 30px;">
+                    <!-- body empty -->
+                    {{block body}} {{end}}
+            </div>
+        {{pass}}
+        
+        {{if useownmenu:}}
+            <div style="margin-left: 30px;">
+                <!-- body with left menu end its body -->
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="span3">
+                            <center>
+                                {{block leftmenu}}{{end}}
+                            </center>
+                        </div>
+                        <div class="span8">
+                            <center>
+                                <div class="accordion" style="width: 100%;">
+                                  <div class="accordion-group">
+                                    <div class="accordion-heading">
+                                      <center>
+                                        <div class="accordion-toggle div-blue">
+                                              {{block nameofmenu}}{{end}}
+                                        </div>  
+                                      </center>
+                                    </div>
+                                  </div>
+                                  <div class="accordion-group">
+                                    <div class="accordion-heading">
+                                      <div class="accordion-toggle">
+                                            {{block descriptionofmenu}}{{end}}
+                                      </div>      
+                                    </div>
+                                  </div>
                                 </div>
-                              </div>
-                              <div class="accordion-group">
-                                <div class="accordion-heading">
-                                  <div class="accordion-toggle">
-                                        {{ block descriptionofmenu }}{{ end }}
-                                  </div>      
-                                </div>
-                              </div>
-                            </div>
-                        </center>
+                            </center>
+                        </div>
                     </div>
                 </div>
             </div>
-
-        </div>
-
- 
-
+        {{pass}}
+        
+       
         {{if left_sidebar_enabled:}}
             <div class="span3 left-sidebar">
                 {{block left_sidebar}}
@@ -173,11 +181,11 @@
         <footer class="footer span12" id="footer">
             <div class="footer-content">
                 {{block footer}} <!-- this is default footer -->
-                <div class="copyright pull-left">{{=T('Copyright')}} &#169; {{=request.now.year}}</div>
-                <div id="poweredBy" class="pull-right">
-                    {{=T('Powered by')}}
-                    <a href="http://www.web2py.com/">web2py</a>
-                </div>
+                    <div class="copyright pull-left">{{=T('Copyright')}} &#169; {{=request.now.year}}</div>
+                    <div id="poweredBy" class="pull-right">
+                        {{=T('Powered by')}}
+                        <a href="http://www.web2py.com/">web2py</a>
+                    </div>
                 {{end}}
             </div>
         </footer>
@@ -209,4 +217,3 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
   <script src="{{=URL('static','js/share.js',vars=dict(static=URL('static','images')))}}"></script>
 </body>
 </html>
-

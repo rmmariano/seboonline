@@ -85,3 +85,17 @@ use_janrain(auth, filename='private/janrain.key')
 
 ## after defining tables, uncomment below to enable auditing
 # auth.enable_record_versioning(db)
+
+db.define_table('item_category',
+                        Field('name_item_category','string'))
+
+db.define_table('item',
+                        Field('title','string'),
+                        Field('category_id','reference item_category'),
+                        Field('description','string'))
+
+db.item_category.name_item_category.requires = IS_NOT_EMPTY()
+
+db.item.title.requires = IS_NOT_EMPTY()
+db.item.category_id.requires=IS_IN_DB(db, db.item_category.id,'%(name_item_category)s',zero='Selecione uma categoria',error_message='Categoria não encontrada.')
+db.item.description.requires = IS_NOT_EMPTY()

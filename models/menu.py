@@ -14,6 +14,8 @@ response.subtitle = 'O seu site de trocas.'
 response.logo = A(B(response.title),XML('&trade;&nbsp;'),_class="brand",_href=URL('default', 'index'))
 #response.title = request.application.replace('_',' ').title()
 
+response.version = '0.0.1'
+response.date_version = '27/08/2015'
 
 ## read more at http://dev.w3.org/html5/markup/meta.name.html
 response.meta.author = 'Your Name <you@example.com>'

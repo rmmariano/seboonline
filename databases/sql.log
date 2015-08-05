@@ -53,3 +53,48 @@ CREATE TABLE auth_cas(
     renew CHAR(1)
 );
 success!
+timestamp: 2015-08-04T17:15:14.722000
+CREATE TABLE category(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name_category CHAR(512)
+);
+success!
+timestamp: 2015-08-04T17:15:14.996000
+CREATE TABLE item(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    title CHAR(512),
+    id_category INTEGER REFERENCES category (id) ON DELETE CASCADE,
+    description CHAR(512)
+);
+success!
+timestamp: 2015-08-04T17:16:36.622000
+CREATE TABLE item_category(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name_item_category CHAR(512)
+);
+success!
+success!
+timestamp: 2015-08-05T10:25:30.885000
+ALTER TABLE item ADD category_id INTEGER REFERENCES item_category (id) ON DELETE CASCADE;
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
