@@ -1,9 +1,11 @@
 # -*- coding: utf-8 -*-
+from common import update_auth_user
 
 @auth.requires_login() 
 @auth.requires_membership('admin')
 def users():
 	form = SQLFORM.smartgrid(db.auth_user,linked_tables=['item'],searchable= dict(item=False))
+	update_auth_user(auth) #depois que atualizar as inf, atualiza a sessão
 	return dict(form=form)
 
 @auth.requires_login() 
@@ -28,10 +30,6 @@ def myitems():
 
 
 
-
-
-
-	
 
 ######################################################
 def user():

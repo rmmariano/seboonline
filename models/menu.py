@@ -33,6 +33,8 @@ response.menu = [(T('Home'), False, URL('default', 'index'), [])]
 
 # only users can access it.
 myaccount = [(T('My Account'), False, URL('account', 'myitems'))]
+myaccount_admin = [(T('My Account Admin'), False, URL('account', 'myitems_admin'))]
+
 
 DEVELOPMENT_MENU = True
 

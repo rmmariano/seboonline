@@ -10,3 +10,11 @@ def requires_membership(auth_user_id,group_role):
 	    return True
 	else:
 	    return False
+
+def update_auth_user(auth):
+	try:
+		foo = dict(auth.profile().as_dict()['record'])
+		del foo['password']
+		auth.user.update(**foo)
+	except:
+		pass

@@ -15,7 +15,7 @@
 			</div>			
 		</div>
 	</div>
-	{{if requires_membership(auth.user.id,'admin'):}}
+	{{if requires_membership(auth.user_id,'admin'):}}
 		{{include 'account/account_menu_admin.html'}}
 	{{else:}}
 		<div class="accordion-group">
