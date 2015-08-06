@@ -15,22 +15,17 @@
 			</div>			
 		</div>
 	</div>
-	{{if requires_membership(auth.user.id,'administrator'):}}
-	<div class="accordion-group">
-		<div class="accordion-heading">
-			<a class="accordion-toggle" href="{{=URL('account', 'users')}}">
-			Usuários
-			</a>
+	{{if requires_membership(auth.user.id,'admin'):}}
+		{{include 'account/account_menu_admin.html'}}
+	{{else:}}
+		<div class="accordion-group">
+			<div class="accordion-heading">
+				<a class="accordion-toggle" href="{{=URL('account', 'myitems')}}">
+				Meus Itens
+				</a>
+			</div>
 		</div>
-	</div>
 	{{pass}}
-	<div class="accordion-group">
-		<div class="accordion-heading">
-			<a class="accordion-toggle" href="{{=URL('account', 'myitems')}}">
-			Meus Itens
-			</a>
-		</div>
-	</div>
 	<div class="accordion-group">
 		<div class="accordion-heading">
 			<a class="accordion-toggle" href="#">

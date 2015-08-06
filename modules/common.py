@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 from gluon import current
 
 def requires_membership(auth_user_id,group_role):

@@ -1,18 +1,37 @@
-from common import requires_membership
+# -*- coding: utf-8 -*-
 
 @auth.requires_login() 
-@auth.requires_membership('administrator')
+@auth.requires_membership('admin')
 def users():
-	grid = SQLFORM.smartgrid(db.auth_user,linked_tables=['name'])
-	return dict(grid=grid)
+	form = SQLFORM.smartgrid(db.auth_user,linked_tables=['item'],searchable= dict(item=False))
+	return dict(form=form)
+
+@auth.requires_login() 
+@auth.requires_membership('admin')
+def categories():
+	form = SQLFORM.smartgrid(db.item_category,linked_tables=['name_item_category'])
+	return dict(form=form)
+
+@auth.requires_login() 
+@auth.requires_membership('admin')
+def myitems_admin():
+	form=SQLFORM.smartgrid(db.item)
+	return dict(form=form)
 
 @auth.requires_login() 
 def myitems():
-	grid = SQLFORM.smartgrid(db.item,linked_tables=['title'])
+	#form = SQLFORM.grid(query=((db.item.created_by==auth.user_id)))
+	#form = SQLFORM.smartgrid(query=db.item.created_by==auth.user_id)
+	#SQMFORM.smartgrid(table, constraints = dict(tablename = query))
+	form=SQLFORM.smartgrid(db.item,constraints=dict(item=db.item.created_by==auth.user_id))
+	return dict(form=form)
 
-	#TODO: colocar um where na condicao, aparecer os itens somente do usuario X
 
-	return dict(grid=grid)
+
+
+
+
+	
 
 ######################################################
 def user():

@@ -51,8 +51,12 @@ auth = Auth(db)
 service = Service()
 plugins = PluginManager()
 
-auth.settings.extra_fields['auth_user']=[Field('image', 'upload',default="static/images/others/no-image.jpg"),
-                                                           Field('created_on','datetime',default=request.now,update=request.now)
+auth.settings.extra_fields['auth_user']=[
+                                                        Field('image', 'upload',default="static/images/others/no-image.jpg"),
+                                                        Field('created_on', 'datetime', default=request.now,writable = False),
+                                                        Field('created_by', 'reference auth_user', default=auth.user_id,writable = False),
+                                                        Field('updated_on', 'datetime', update=request.now,writable = False),
+                                                        Field('updated_by', 'reference auth_user', update=auth.user_id,writable = False)
                                                            ]
 
 ## create all tables needed by auth if not custom tables
@@ -98,33 +102,33 @@ use_janrain(auth, filename='private/janrain.key')
 
 db.define_table('item_category',
                         Field('name_item_category','string'),
-                        Field('created_on','datetime',default=request.now,update=request.now),
-                        Field('created_by','reference auth_user',default=auth.user_id,update=auth.user_id))
+                        Field('created_on', 'datetime', default=request.now,writable = False),
+                        Field('created_by', 'reference auth_user', default=auth.user_id,writable = False),
+                        Field('updated_on', 'datetime', update=request.now,writable = False),
+                        Field('updated_by', 'reference auth_user', update=auth.user_id,writable = False))
 
 db.define_table('item',
                         Field('title','string'),
                         Field('category_id','reference item_category'),
-                        Field('description','string'),
-                        Field('created_on','datetime',default=request.now,update=request.now),
-                        Field('created_by','reference auth_user',default=auth.user_id,update=auth.user_id))
+                        Field('description','string'),                        
+                        Field('created_on', 'datetime', default=request.now,writable = False),
+                        Field('created_by', 'reference auth_user', default=auth.user_id,writable = False),
+                        Field('updated_on', 'datetime', update=request.now,writable = False),
+                        Field('updated_by', 'reference auth_user', update=auth.user_id,writable = False))
 
 
 db.item_category.name_item_category.requires = IS_NOT_EMPTY()
+'''
 db.item_category.created_by.readable = db.item_category.created_by.writable = False
 db.item_category.created_on.readable = db.item_category.created_on.writable = False
+db.item_category.updated_by.readable = False
+db.item_category.updated_on.readable = False
+'''
 
 db.item.title.requires = IS_NOT_EMPTY()
 db.item.category_id.requires=IS_IN_DB(db, db.item_category.id,'%(name_item_category)s',zero='Selecione uma categoria',error_message='Categoria não encontrada.')
 db.item.description.requires = IS_NOT_EMPTY()
+'''
 db.item.created_by.readable = db.item.created_by.writable = False
 db.item.created_on.readable = db.item.created_on.writable = False
-
-'''
-
-Field('created_on', 'datetime', default=request.now),
-330 web2py complete reference manual, 5th edition
-3 Field('created_by', db.auth_user, default=auth.user_id),
-4 Field('updated_on', 'datetime', update=request.now),
-5 Field('updated_by', db.auth_user, update=auth.user_id))
-
 '''
