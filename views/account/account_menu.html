@@ -1,19 +1,29 @@
-<div class="accordion" style="width: 150px;">
+{{from common import requires_membership}}
 
+<div class="accordion" style="width: 150px;">
 	<div class="accordion-group">
 		<div class="accordion-heading">
 			<center>
-				<img src="{{=URL('static','images/outros/perfil/griffith.jpg')}}" style="width: 80%; height: 150px; display: block;">
+				<img src="{{=URL('static','images/others/perfil/griffith.jpg')}}" style="width: 80%; height: 150px; display: block;">
 			</center>
 		</div>
 	</div>
 	<div class="accordion-group">
 		<div class="accordion-heading">
 			<div class="accordion-toggle div-blue">
-				Griffith
+				{{=auth.user.first_name+' '+auth.user.last_name}}
 			</div>			
 		</div>
 	</div>
+	{{if requires_membership(auth.user.id,'administrator'):}}
+	<div class="accordion-group">
+		<div class="accordion-heading">
+			<a class="accordion-toggle" href="{{=URL('account', 'users')}}">
+			Usuários
+			</a>
+		</div>
+	</div>
+	{{pass}}
 	<div class="accordion-group">
 		<div class="accordion-heading">
 			<a class="accordion-toggle" href="{{=URL('account', 'myitems')}}">
@@ -35,5 +45,4 @@
 			</a>
 		</div>
 	</div>
-
-</div>
+</div> <!-- .accordion -->

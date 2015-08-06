@@ -9,6 +9,8 @@
 ## be redirected to HTTPS, uncomment the line below:
 # request.requires_https()
 
+from gluon import current
+
 if not request.env.web2py_runtime_gae:
     ## if NOT running on Google App Engine use SQLite or other DB
     db = DAL('sqlite://storage.sqlite',pool_size=1,check_reserved=['all'])
@@ -21,6 +23,8 @@ else:
     ## from gluon.contrib.memdb import MEMDB
     ## from google.appengine.api.memcache import Client
     ## session.connect(request, response, db = MEMDB(Client()))
+
+current.db = db
 
 ## by default give a view/generic.extension to all actions from localhost
 ## none otherwise. a pattern can be 'controller/function.extension'
@@ -46,6 +50,10 @@ from gluon.tools import Auth, Service, PluginManager
 auth = Auth(db)
 service = Service()
 plugins = PluginManager()
+
+auth.settings.extra_fields['auth_user']=[Field('image', 'upload',default="static/images/others/no-image.jpg"),
+                                                           Field('created_on','datetime',default=request.now,update=request.now)
+                                                           ]
 
 ## create all tables needed by auth if not custom tables
 auth.define_tables(username=False, signature=False)
@@ -86,16 +94,37 @@ use_janrain(auth, filename='private/janrain.key')
 ## after defining tables, uncomment below to enable auditing
 # auth.enable_record_versioning(db)
 
+
+
 db.define_table('item_category',
-                        Field('name_item_category','string'))
+                        Field('name_item_category','string'),
+                        Field('created_on','datetime',default=request.now,update=request.now),
+                        Field('created_by','reference auth_user',default=auth.user_id,update=auth.user_id))
 
 db.define_table('item',
                         Field('title','string'),
                         Field('category_id','reference item_category'),
-                        Field('description','string'))
+                        Field('description','string'),
+                        Field('created_on','datetime',default=request.now,update=request.now),
+                        Field('created_by','reference auth_user',default=auth.user_id,update=auth.user_id))
+
 
 db.item_category.name_item_category.requires = IS_NOT_EMPTY()
+db.item_category.created_by.readable = db.item_category.created_by.writable = False
+db.item_category.created_on.readable = db.item_category.created_on.writable = False
 
 db.item.title.requires = IS_NOT_EMPTY()
 db.item.category_id.requires=IS_IN_DB(db, db.item_category.id,'%(name_item_category)s',zero='Selecione uma categoria',error_message='Categoria não encontrada.')
 db.item.description.requires = IS_NOT_EMPTY()
+db.item.created_by.readable = db.item.created_by.writable = False
+db.item.created_on.readable = db.item.created_on.writable = False
+
+'''
+
+Field('created_on', 'datetime', default=request.now),
+330 web2py complete reference manual, 5th edition
+3 Field('created_by', db.auth_user, default=auth.user_id),
+4 Field('updated_on', 'datetime', update=request.now),
+5 Field('updated_by', db.auth_user, update=auth.user_id))
+
+'''
