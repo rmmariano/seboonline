@@ -93,7 +93,7 @@
 
         {{if requires_membership(auth.user_id,'admin'):}}
             <ul id="navbar" class="nav pull-right">{{=MENU(myaccount_admin, _class='mobile-menu nav' if is_mobile else 'nav',mobile=is_mobile,li_class='dropdown',ul_class='dropdown-menu')}}</ul>
-        {{else:}}
+        {{elif auth.user:}}
             <ul id="navbar" class="nav pull-right">{{=MENU(myaccount, _class='mobile-menu nav' if is_mobile else 'nav',mobile=is_mobile,li_class='dropdown',ul_class='dropdown-menu')}}</ul>
         {{pass}}
 
