@@ -159,7 +159,7 @@
 'Menu Model': 'Modelo de Menu',
 'Minha Conta': 'Minha Conta',
 'My Account': 'Minha Conta',
-'My Account Admin': 'My Account Admin',
+'My Account Admin': 'Minha Conta Admin',
 'My Items': 'Meus Itens',
 'My Sites': 'Meus sites',
 'Name': 'Nome',
