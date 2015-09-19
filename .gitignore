@@ -1,3 +1,15 @@
+# backup and log files and compiled sources
+*.*~
+*.log
+*.swp
+*.table
+errors/*
+databases/*
+sessions/*
+cache/*
+static/temp
+progress.log
+__pycache__/*
 *.pyc
 *.pyo
 *.1
@@ -16,8 +28,6 @@ logging.conf
 httpserver.log
 httpserver.pid
 parameters*.py
-./admin.w2p
-./examples.w2p
 cron.master
 HOWTO-web2py-devel
 *.sublime-project
